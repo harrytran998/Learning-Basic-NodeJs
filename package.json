@@ -1,0 +1,8 @@
+{
+  "name": "Learn-Back-End",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jetaimefrc/Learn-Back-End.git",
+  "author": "NhatTq <jetaimefrc@gmail.com>",
+  "license": "MIT"
+}
