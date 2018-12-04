@@ -1,9 +1,12 @@
-const http = require('http')
-const routes = require('./routes')
-require('dotenv').config()
+const hobbies = ['Swimming', 'Fucking', 'Eating', 'Travelling', 'Hunting Girl', 'Slepping']
 
-const server = http.createServer(routes)
+const copyArray = hobbies.slice(2,4) // to copy an array  
+const copyArray2 = [hobbies] // copy hobbies array to one element in copyArray2
+const copyArray3 = [...hobbies] //Spread Operator
 
-let PORT = process.env.PORT
 
-server.listen(PORT)
+
+console.log(copyArray3)
+console.log(copyArray2)
+console.log(copyArray)
+

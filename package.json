@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "dev": "nodemon app.js"
   },
   "repository": "https://github.com/jetaimefrc/Learn-Back-End.git",
   "author": "NhatTq <jetaimefrc@gmail.com>",
