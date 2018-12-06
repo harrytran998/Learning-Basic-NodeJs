@@ -1,31 +1,21 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const adminRouter = require('./routes/admin')
-const shopRouter = require('./routes/shop')
-const _404_Not_Found = require('./routes/404-Not-Found')
+const path = require('path');
 
-const app = express()
+const express = require('express');
+const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/admin', adminRouter)
-app.use('/shop', shopRouter)
-app.use(_404_Not_Found)
+const app = express();
 
-app.listen(3000)
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-// console.log(toArray(1, 2, 3, 4))
-// // console.log(copyArray3)
-// // console.log(copyArray2)
-// // console.log(copyArray)
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/admin', adminRoutes);
+app.use(shopRoutes);
 
-// const hobbies = ['Swimming', 'Fucking', 'Eating', 'Travelling', 'Hunting Girl', 'Slepping']
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+});
 
-// const copyArray = hobbies.slice(2,4) // to copy an array  
-// const copyArray2 = [hobbies] // copy hobbies array to one element in copyArray2
-// const copyArray3 = [...hobbies] //Spread Operator
-
-// const toArray = (...args) => { //to merge multiple arguments into an array
-//   return args   // have flexibility
-// }
- 
+app.listen(3000);
