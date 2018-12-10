@@ -3,17 +3,22 @@ const {
   pathData
 } = require('../util/path')
 
+const getProductsFromFile = (callback) => {
+  fs.readFileSync(pathData, (err, allData) => {
+    if (!err) {
+      callback(JSON.parse(allData))
+    } else {
+      callback([])
+    }
+  })
+}
 module.exports = class Product {
   constructor(title) {
     this.title = title
   }
 
   save() {
-    fs.readFile(pathData, (err, fileContent) => {
-      let products = []
-      if (!err) {
-        products = JSON.parse(fileContent)
-      }
+    getProductsFromFile((products) => {
       products.push(this)
       fs.writeFileSync(pathData, JSON.stringify(products), (err) => {
         console.log(err)
@@ -21,13 +26,10 @@ module.exports = class Product {
     })
   }
 
-  static fetchAll() {
-    fs.readFileSync(pathData, (err, allData) => {
-      if (!err) {
-        return JSON.parse(allData)
-      }
-      return []
-    })
+  /**
+   * @returns {Array} JSON.parse(allData)
+   */
+  static fetchAll(callback) {
+    getProductsFromFile(callback)
   }
-
 }
